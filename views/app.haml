@@ -1,0 +1,23 @@
+!!!
+%html.no-js{ :lang => "en", :ng => { :app => @app ||= true }}
+  %head
+    %title Blog
+    %meta{ :charset => "utf-8" }
+    %meta{ :name => "description", :content => @description ||= "" }
+    %meta{ :name => "viewport", :content => "width=device-width" }
+    %meta{ :name => "fragment", :content => "!" }
+    %link{ :rel => "stylesheet", :src => "/css/screen.css" }
+    %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" }
+    %script window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')
+    %script{ :src => "//ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js" }
+    %script window.angular || document.write('<script src="js/vendor/angular-1.0.5.min.js"><\/script>')
+    %script{ :src => "/js/vendor/modernizr-2.6.2.min.js" }
+    %script{ :src => "/js/plugins.js" }
+    %script{ :src => "/js/app.js" }
+    - @ng ||= {}
+    - @ng.each do |k,v|
+      - unless v.empty?
+        - v.each do |js|
+          %script{ :src => "/js/" + k.to_s + '/' + js + '.js' }
+  %body
+    %div{ :ng => { :view => true }}
