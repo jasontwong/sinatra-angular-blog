@@ -1,8 +1,6 @@
 require 'sinatra/base'
 require 'haml'
 require 'json'
-require 'active_support/lazy_load_hooks'
-require 'active_support/core_ext/string'
 
 class App::Post < Sinatra::Base
 

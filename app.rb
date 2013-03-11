@@ -1,7 +1,8 @@
-require 'bundler/setup'
 require 'sinatra/base'
 require 'sass'
 require 'haml'
+require 'active_support/lazy_load_hooks'
+require 'active_support/core_ext/string'
 require './helpers'
 
 class App < Sinatra::Base
