@@ -1,7 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('posts').controller('PostsCtrl', function($scope) {
-    $scope.foo = 'posts';
-  });
+  angular
+    .module('blog')
+    .controller('PostsCtrl', function($scope) {
+      $scope.foo = 'posts';
+    });
 }());

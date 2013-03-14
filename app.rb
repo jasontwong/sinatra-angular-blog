@@ -23,9 +23,10 @@ class App < Sinatra::Base
     disable :dump_errors, :logging
     set :bind, '0.0.0.0'
     set :port, 80
+    set :haml, :ugly => true
   end
 
-  Dir[File.dirname(__FILE__) + '/apps/*.rb'].each do |file| 
+  Dir[File.dirname(__FILE__) + '/apis/*.rb'].each do |file| 
     file_class = 'app/' + File.basename(file, File.extname(file))
     require file
     use file_class.classify.constantize
@@ -44,7 +45,6 @@ class App < Sinatra::Base
   end
 
   get '/*' do
-    @app = 'main'
     haml :app
   end
 

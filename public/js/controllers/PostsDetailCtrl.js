@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('posts')
+    .module('blog')
     .controller('PostsDetailCtrl', function($scope, $routeParams) {
       $scope.foo = 'posts detail';
     });

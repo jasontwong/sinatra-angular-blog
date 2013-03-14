@@ -1,5 +1,5 @@
 !!!
-%html.no-js{ :lang => "en", :ng => { :app => @app ||= true }}
+%html.no-js{ :lang => "en", :ng => { :app => 'blog' }}
   %head
     %title Blog
     %meta{ :charset => "utf-8" }
@@ -11,13 +11,25 @@
     %script window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')
     %script{ :src => "//ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js" }
     %script window.angular || document.write('<script src="js/vendor/angular-1.0.5.min.js"><\/script>')
+    %script{ :src => "//ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular-resource.min.js" }
+    %script window.angular || document.write('<script src="js/vendor/angular-resource-1.0.5.min.js"><\/script>')
     %script{ :src => "/js/vendor/modernizr-2.6.2.min.js" }
     %script{ :src => "/js/plugins.js" }
     %script{ :src => "/js/app.js" }
-    - @ng ||= {}
-    - @ng.each do |k,v|
-      - unless v.empty?
-        - v.each do |js|
-          %script{ :src => "/js/" + k.to_s + '/' + js + '.js' }
-  %body
-    %div{ :ng => { :view => true }}
+    %script{ :src => "/js/controllers/BlogCtrl.js" }
+    %script{ :src => "/js/controllers/PostsCtrl.js" }
+    %script{ :src => "/js/controllers/PostsDetailCtrl.js" }
+    %script{ :src => "/js/controllers/PostsFormCtrl.js" }
+    %script{ :src => "/js/services/NavSvc.js" }
+  %body{ :ng => { :controller => 'BlogCtrl' }}
+    %header
+      %nav
+        %ul
+          %li{ :ng => { :repeat => 'link in hLinks', :class => '{active: $route.current.activeNav == link.type}' }}
+            %a{ :href => '{{link.uri}}' } {{link.name}}
+    %main{ :ng => { :view => true }}
+    %footer
+      %nav
+        %ul
+          %li{ :ng => { :repeat => 'link in fLinks' }}
+            %a{ :href => '{{link.uri}}' } {{link.name}}
