@@ -3,7 +3,7 @@
 
   angular
     .module('blog')
-    .controller('PostsCtrl', function($scope) {
-      $scope.foo = 'posts';
+    .controller('PostsCtrl', function($scope, Post) {
+      $scope.posts = Post.query({ limit: 10 });
     });
 }());

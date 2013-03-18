@@ -4,7 +4,7 @@
   angular
     .module('blog.NavSvc', ['ngResource'])
     .factory('Nav', function($resource) {
-      var Nav = $resource('/1.1/nav');
+      var Nav = $resource('/api/1.1/nav');
       return Nav;
     });
 }());

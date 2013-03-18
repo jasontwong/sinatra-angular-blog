@@ -1,1 +1,6 @@
-%h1 {{foo}}
+.posts
+  %article{ :class => 'post-id-{{post.id}} post', :ng => { :repeat => 'post in posts' }}
+    %a{ :href => '/posts/{{post.slug}}' }
+      %h2 {{post.title}}
+    .entry-meta {{post.date}}
+    .entry-excerpt {{post.excerpt}}

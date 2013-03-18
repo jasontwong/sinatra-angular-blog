@@ -17,7 +17,7 @@ class App::Nav < Sinatra::Base
     ]
   end
 
-  get '/:version/nav', :xhr => true, :provides => :json do
+  get '/api/:version/nav', :xhr => true, :provides => :json do
     case params[:type]
     when 'footer'
       @f_links.to_json

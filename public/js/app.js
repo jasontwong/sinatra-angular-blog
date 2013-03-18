@@ -2,7 +2,7 @@
   "use strict";
 
   angular
-    .module('blog', [ 'blog.NavSvc' ])
+    .module('blog', [ 'blog.NavSvc', 'blog.PostSvc' ])
     .config([
       '$routeProvider',
       '$locationProvider',
