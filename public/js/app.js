@@ -2,7 +2,7 @@
   "use strict";
 
   angular
-    .module('blog', [ 'blog.NavSvc', 'blog.PostSvc' ])
+    .module('blog', [ 'blog.NavSvc', 'blog.PageSvc', 'blog.PostSvc' ])
     .config([
       '$routeProvider',
       '$locationProvider',
@@ -14,12 +14,12 @@
           };
         $locationProvider.html5Mode(true);
         $routeProvider
-          .when('/about-us', {
+          .when('/page/about-us', {
             templateUrl: '/tpl/page', 
             controller: 'PageCtrl',
             activeNav: 'about-us'
           })
-          .when('/contact-us', {
+          .when('/page/contact-us', {
             templateUrl: '/tpl/page', 
             controller: 'PageCtrl',
             activeNav: 'contact-us'

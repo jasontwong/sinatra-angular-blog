@@ -9,8 +9,8 @@ class App::Nav < Sinatra::Base
   before do
     @h_links = [
       { uri: '/posts', name: 'Posts', type: 'posts' },
-      { uri: '/about-us', name: 'About Us', type: 'about-us' },
-      { uri: '/contact-us', name: 'Contact Us', type: 'contact-us' },
+      { uri: '/page/about-us', name: 'About Us', type: 'about-us' },
+      { uri: '/page/contact-us', name: 'Contact Us', type: 'contact-us' },
     ]
     @f_links = [
     ]
