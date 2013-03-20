@@ -66,8 +66,7 @@ class App::Post < Sinatra::Base
     begin
       post_data = JSON.parse(request.body.read.to_s)
       post_data.delete('_id')
-      post_data.delete('date')
-      @posts.update({ :slug => params[:slug] }, post_data)
+      @posts.update({ :slug => params[:slug] }, { '$set' => post_data })
       post = post_data
     rescue
       post = @posts.find_one({ :slug => params[:slug] })
