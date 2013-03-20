@@ -1,5 +1,7 @@
 require 'sinatra/base'
 require 'json'
+require 'active_support/lazy_load_hooks'
+require 'active_support/core_ext/string'
 
 class App::Post < Sinatra::Base
 
@@ -32,6 +34,10 @@ class App::Post < Sinatra::Base
   get '/api/:version/posts', :xhr => true, :provides => :json do
     filtered_posts = @sorted_posts
 
+    if params[:slug]
+      @posts.each{ |post| return post.to_json if post[:slug] == params[:slug] }
+    end
+
     if params[:limit]
       filtered_posts = filtered_posts.take(params[:limit].to_i)
     end
@@ -39,10 +45,43 @@ class App::Post < Sinatra::Base
     return filtered_posts.to_json
   end
 
-  get '/api/:version/posts/:slug', :xhr => true, :provides => :json do
-    @posts.each{ |post| return post.to_json if post[:slug] == params[:slug] }
+  get '/api/:version/posts/:id', :xhr => true, :provides => :json do
+    @posts.each{ |post| return post.to_json if post[:id] == params[:id].to_i }
 
     return {}.to_json
+  end
+
+  post '/api/:version/posts', :xhr => true, :provides => :json do
+    @post = JSON.parse(request.body.read.to_s)
+    @post = @post.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+
+    unless @post[:slug]
+      @post[:slug] = @post[:title].downcase.dasherize
+    end
+
+    unless @post[:date]
+      @post[:date] = Date.today.strftime('%Y-%m-%d')
+    end
+
+    @post[:id] = @posts.length
+
+    @posts << @post
+
+    return @post.to_json
+  end
+
+  put '/api/:version/posts/:id', :xhr => true, :provides => :json do
+    @post = JSON.parse(request.body.read.to_s)
+    @post = @post.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+    @posts.each{ |post| return post.merge!(@post).to_json if post[:id] == @post[:id].to_i }
+
+    return {}.to_json
+  end
+
+  delete '/api/:version/posts/:id', :xhr => true, :provides => :json do
+    params[:id] = params[:id].to_i
+
+    return { :success => !@posts.reject!{ |post| post[:id] == params[:id] }.nil? }.to_json
   end
 
 end

@@ -4,7 +4,9 @@
   angular
     .module('blog.PostSvc', ['ngResource'])
     .factory('Post', function($resource) {
-      var Post = $resource('/api/1.1/posts/:slug', { 'slug' : '@slug' }, {});
+      var Post = $resource('/api/1.0/posts/:id', {}, {
+        update: { method: 'PUT', params: { id: '@id' }}
+      });
       return Post;
     });
 }());

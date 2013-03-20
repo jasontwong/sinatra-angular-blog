@@ -1,1 +1,13 @@
-%h1 {{foo}}
+%form{ :method => 'POST', :name => 'post-form' }
+  .row
+    .field
+      %input{ :value => '{{post.title}}', :required => true, :placeholder => 'Title', :type => 'text', :name => 'title', :ng => { :model => 'post.title' }}
+  .row
+    .field
+      %input{ :value => '{{post.excerpt}}', :required => true, :placeholder => 'Excerpt', :type => 'text', :name => 'excerpt', :ng => { :model => 'post.excerpt' }}
+  .row
+    .field
+      %input{ :value => '{{post.content}}', :required => true, :placeholder => 'Content', :type => 'text', :name => 'content', :ng => { :model => 'post.content' }}
+  .row
+    .field
+      %button{ :ng => { :click => 'save()', :disabled => 'post-form' }} Save
