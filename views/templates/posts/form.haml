@@ -10,4 +10,4 @@
       %input{ :value => '{{post.content}}', :required => true, :placeholder => 'Content', :type => 'text', :name => 'content', :ng => { :model => 'post.content' }}
   .row
     .field
-      %button{ :ng => { :click => 'save()', :disabled => 'post-form' }} Save
+      %button{ :ng => { :click => 'save()', :disabled => 'post-form' }} {{isEdit && 'Save' || 'Create'}}

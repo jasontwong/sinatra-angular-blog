@@ -4,7 +4,7 @@
   angular
     .module('blog')
     .controller('PostsFormCtrl', function($scope, $routeParams, Post) {
-      $scope.isEdit = $routeParams.hasOwnProperty('id'); 
+      $scope.isEdit = $routeParams.hasOwnProperty('slug'); 
       $scope.post = $scope.isEdit ? Post.get($routeParams) : new Post();
       $scope.save = function() {
         if ($scope.isEdit) {

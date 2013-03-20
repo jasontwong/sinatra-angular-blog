@@ -30,7 +30,7 @@
             activeNav: 'posts'
           })
           .when('/posts/new', post_form)
-          .when('/posts/edit/:id', post_form)
+          .when('/posts/edit/:slug', post_form)
           .when('/posts/:slug', { 
             templateUrl: '/tpl/posts/detail', 
             controller: 'PostsDetailCtrl',
